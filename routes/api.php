@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HugsIncRegistrationController;
+use App\Http\Controllers\PreRegistration\HugsIncRegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

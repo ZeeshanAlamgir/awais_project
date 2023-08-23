@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PreRegistration;
 
+use App\Http\Controllers\Controller;
 use App\Http\Repo\HugsIncReg\RegistrationInterface;
 use Illuminate\Http\Request;
 
