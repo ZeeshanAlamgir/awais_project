@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\SendRegistrationMailEvent;
 use App\Http\Repo\HugsIncReg\RegistrationInterface;
 use App\Http\Repo\HugsIncReg\RegistrationService;
+use App\Listeners\SendRegistrationMailListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -20,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        SendRegistrationMailEvent::class => [
+            SendRegistrationMailListener::class
+        ]
     ];
 
     /**

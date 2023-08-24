@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PreRegistration\HugsIncRegistrationController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(HugsIncRegistrationController::class)->group( function () {
     Route::post('pre-registration', 'store');
+} );
+
+
+Route::controller(UserController::class)->group( function () {
+    Route::get('users-list', 'index');
 } );

@@ -2,9 +2,11 @@
 
 namespace App\Http\Repo\HugsIncReg;
 
+use App\Events\SendRegistrationMailEvent;
 use App\Models\HugsIncRegistration;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RegistrationService implements RegistrationInterface
 {
@@ -12,6 +14,7 @@ class RegistrationService implements RegistrationInterface
     {
         try
         {
+            Log::info("Before Registration Api Calling");
             $hugs_inc_reg = new HugsIncRegistration();
             DB::transaction( function () use($hugs_inc_reg, $request) {
                 $hugs_inc_reg->registration_date = $request['registration_date'] ? date('Y-m-d', strtotime($request['registration_date'])) : null;
@@ -51,11 +54,19 @@ class RegistrationService implements RegistrationInterface
                 $hugs_inc_reg->walk_in = $request['walk_in'] ?? null;
                 $hugs_inc_reg->save();
             } );
+            Log::info("After Registration Api Calling".$hugs_inc_reg);
+
+
+            if(isset($request['email']) && !empty($request['email']))
+            {
+                event(new SendRegistrationMailEvent($request['email']));
+            }
             return $hugs_inc_reg;
         }
         catch (Exception $ex)
         {
-            dd($ex->getMessage());
+            Log::info("Exceptio Occured".$ex->getMessage());
+            // dd($ex->getMessage());
         }
     }
 }
