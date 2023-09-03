@@ -18,6 +18,14 @@ class RegistrationService implements RegistrationInterface
             if(isset($id) && !is_null($id))
             {
                 $hugs_inc_reg = HugsIncRegistration::find($id);
+                if(is_null($hugs_inc_reg))
+                {
+                    return response()->json([
+                        'status'    => false,
+                        'status_code'   => 400,
+                        'message'   => "Record Not Found",
+                    ]);
+                }
             }
             else
             {
