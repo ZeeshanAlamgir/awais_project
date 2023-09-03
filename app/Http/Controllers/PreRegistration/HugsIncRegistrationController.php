@@ -15,7 +15,7 @@ class HugsIncRegistrationController extends Controller
         return $this->hug_inc_reg = $registration_interface;
     }
 
-    public function store (Request $request, $id)
+    public function store (Request $request)
     {
         $hug_reg = $this->hug_inc_reg->registration($request->all());
         if(isset($hug_reg))
