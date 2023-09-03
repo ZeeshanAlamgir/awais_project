@@ -100,6 +100,7 @@ class HugsIncRegistrationController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $id = (int)$id;
         $hug_reg = $this->hug_inc_reg->registration($request->all(), $id);
         if(isset($hug_reg))
