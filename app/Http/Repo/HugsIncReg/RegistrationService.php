@@ -10,12 +10,19 @@ use Illuminate\Support\Facades\Log;
 
 class RegistrationService implements RegistrationInterface
 {
-    public function registration($request)
+    public function registration($request, $id=null)
     {
         try
         {
             Log::info("Before Registration Api Calling");
-            $hugs_inc_reg = new HugsIncRegistration();
+            if(isset($id) && !is_null($id))
+            {
+                $hugs_inc_reg = HugsIncRegistration::find($id);
+            }
+            else
+            {
+                $hugs_inc_reg = new HugsIncRegistration();
+            }
             DB::transaction( function () use($hugs_inc_reg, $request) {
                 $hugs_inc_reg->registration_date = $request['registration_date'] ? date('Y-m-d', strtotime($request['registration_date'])) : null;
                 $hugs_inc_reg->bnatp = $request['bnatp'] ?? null;
@@ -52,10 +59,10 @@ class RegistrationService implements RegistrationInterface
                 $hugs_inc_reg->reffered_by = $request['reffered_by'] ?? null;
                 $hugs_inc_reg->sponsor = $request['sponsor'] ?? null;
                 $hugs_inc_reg->walk_in = $request['walk_in'] ?? null;
+                $hugs_inc_reg->selected_course = $request['selected_course'] ?? null;
                 $hugs_inc_reg->save();
             } );
             Log::info("After Registration Api Calling".$hugs_inc_reg);
-
 
             if(isset($request['email']) && !empty($request['email']))
             {
@@ -66,7 +73,6 @@ class RegistrationService implements RegistrationInterface
         catch (Exception $ex)
         {
             Log::info("Exceptio Occured".$ex->getMessage());
-            // dd($ex->getMessage());
         }
     }
 }

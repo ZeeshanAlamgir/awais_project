@@ -4,5 +4,5 @@ namespace App\Http\Repo\HugsIncReg;
 
 interface RegistrationInterface
 {
-    public function registration($data);
+    public function registration($data, $id=null);
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PreRegistration\HugsIncRegistrationController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
@@ -22,9 +23,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(HugsIncRegistrationController::class)->group( function () {
     Route::post('pre-registration', 'store');
+    Route::put('update-registration/{id}', 'update');
+    Route::get('delete', 'delete');
+    Route::get('show', 'show');
 } );
-
 
 Route::controller(UserController::class)->group( function () {
     Route::get('users-list', 'index');
+} );
+
+Route::controller(AuthController::class)->group( function () {
+    Route::get('login', 'login');
 } );
