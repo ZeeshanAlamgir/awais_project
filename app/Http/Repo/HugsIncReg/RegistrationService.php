@@ -72,10 +72,10 @@ class RegistrationService implements RegistrationInterface
             } );
             Log::info("After Registration Api Calling".$hugs_inc_reg);
 
-            // if(isset($request['email']) && !empty($request['email']))
-            // {
-            //     event(new SendRegistrationMailEvent($request['email']));
-            // }
+            if(isset($request['email']) && !empty($request['email']))
+            {
+                event(new SendRegistrationMailEvent($request['email']));
+            }
             return $hugs_inc_reg;
         }
         catch (Exception $ex)
