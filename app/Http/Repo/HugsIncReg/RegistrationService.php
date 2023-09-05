@@ -80,7 +80,7 @@ class RegistrationService implements RegistrationInterface
         }
         catch (Exception $ex)
         {
-            Log::info("Exceptio Occured".$ex->getMessage());
+            return $ex->getMessage();
         }
     }
 }
