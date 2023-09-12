@@ -25,6 +25,7 @@ class AuthController extends Controller
                     'status'    => true,
                     'token'     =>  $user->createToken('MyApp')->plainTextToken,
                     'name'      =>  $user->name,
+                    'role'      =>  $user->role,
                     'message'   => "Logged In Successfully",
                     'status_code'   => 200
                 ]);

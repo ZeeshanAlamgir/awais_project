@@ -26,7 +26,7 @@ Route::controller(HugsIncRegistrationController::class)->group( function () {
     Route::put('update-registration/{id}', 'update');
     Route::get('delete', 'delete');
     Route::get('show', 'show');
-} );
+})->middleware('cors');
 
 Route::controller(UserController::class)->group( function () {
     Route::get('users-list', 'index');
