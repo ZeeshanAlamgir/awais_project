@@ -120,4 +120,26 @@ class HugsIncRegistrationController extends Controller
             ]);
         }
     }
+
+    public function showAll()
+    {
+        $registrations = HugsIncRegistration::all();
+        if(count($registrations)>0)
+        {
+            return response()->json([
+                'status'    => true,
+                'status_code'   => 200,
+                'message'   => "Registrations Found.",
+                'registrations'   => $registrations,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'    => false,
+                'status_code'   => 400,
+                'message'   => "Something went wrong.",
+            ]);
+        }
+    }
 }
