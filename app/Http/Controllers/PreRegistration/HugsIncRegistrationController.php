@@ -39,12 +39,11 @@ class HugsIncRegistrationController extends Controller
 
     public function delete(Request $request)
     {
-        $is_logged_in = auth('sanctum')->user();
-        if($is_logged_in)
+        if(isset($request['id']))
         {
-            if(isset($request['id']))
+            $hugs_reg = HugsIncRegistration::find($request['id']);
+            if(isset($hug_reg))
             {
-                $hugs_reg = HugsIncRegistration::find($request['id']);
                 $hugs_reg->delete();
                 return response()->json([
                     'status'    => true,
@@ -52,50 +51,48 @@ class HugsIncRegistrationController extends Controller
                     'message'   => "Record Deleted",
                 ]);
             }
-        }
-        else
-        {
-            return response()->json([
-                'status'    => false,
-                'status_code'   => 400,
-                'message'   => "Please logged In.",
-            ]);
-        }
-    }
-
-    public function show(Request $request)
-    {
-        $is_logged_in = auth('sanctum')->user();
-        if($is_logged_in)
-        {
-            $hugs_reg = HugsIncRegistration::find($request['id']);
-            if(isset($hugs_reg))
-            {
-                return response()->json([
-                    'status'    => true,
-                    "data"      => $hugs_reg,
-                    'status_code'   => 200,
-                    'message'   => "Record Found",
-                ]);
-            }
             else
             {
                 return response()->json([
                     'status'    => false,
-                    "data"      => null,
                     'status_code'   => 400,
-                    'message'   => "Record Not Found",
+                    'message'   => "Registration Not Found",
                 ]);
             }
+        }
+        else
+            {
+                return response()->json([
+                    'status'    => false,
+                    'status_code'   => 400,
+                    'message'   => "Registration ID is missing",
+                ]);
+            }
+
+    }
+
+    public function show(Request $request)
+    {
+        $hugs_reg = HugsIncRegistration::find($request['id']);
+        if(isset($hugs_reg))
+        {
+            return response()->json([
+                'status'    => true,
+                "data"      => $hugs_reg,
+                'status_code'   => 200,
+                'message'   => "Record Found",
+            ]);
         }
         else
         {
             return response()->json([
                 'status'    => false,
+                "data"      => null,
                 'status_code'   => 400,
-                'message'   => "Please logged In.",
+                'message'   => "Record Not Found",
             ]);
         }
+
     }
 
     public function update(Request $request, $id)

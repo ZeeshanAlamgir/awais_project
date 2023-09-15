@@ -19,23 +19,23 @@ class AuthController extends Controller
         if($is_login)
         {
             $user = auth('sanctum')->user();
-            if($user)
+            if(isset($user) && !is_null($user))
             {
                 return response()->json([
                     'status'    => true,
-                    'token'     =>  $user->createToken('MyApp')->plainTextToken,
+                    'status_code' => 200,
                     'name'      =>  $user->name,
                     'role'      =>  $user->role,
                     'message'   => "Logged In Successfully",
-                    'status_code'   => 200
+                    'token'     =>  $user->createToken('MyApp')->plainTextToken,
                 ]);
             }
         }
         else
         {
-            response()->json([
+            return response()->json([
                 'status'    => false,
-                'message'   => "Email or Password is incorrect",
+                'message'   => "Invalid Credientials",
                 'status_code'   => 400
             ]);
         }
