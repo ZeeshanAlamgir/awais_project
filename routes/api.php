@@ -31,7 +31,7 @@ Route::controller(HugsIncRegistrationController::class)->group( function () {
 
 Route::controller(UserController::class)->group( function () {
     Route::get('users-list', 'index');
-} );
+} )->middleware('auth:sanctum');
 
 Route::controller(AuthController::class)->group( function () {
     Route::get('login', 'login');
