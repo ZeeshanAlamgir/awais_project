@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>User List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         .main-div {
             background-color: #03C04A;
@@ -27,43 +27,45 @@
    <div class="col-md-10 offset-md-1 table_div mt-3">
     <div class="d-flex justify-content-between">
         <div>
-            <h1>User List</h1>
+            <h1>Registration List</h1>
         </div>
-        <div>
+        {{-- <div>
             <a href="{{ route('create') }}"><button class="btn btn-primary">Add User </button></a>
-
-        </div>
+        </div> --}}
     </div>
        <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Full Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Role</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Registration Date</th>
             <th scope="col">Action</th>
-
           </tr>
         </thead>
         <tbody>
-          @forelse ($users as $key=>$user)
-            <tr>
-                <td>{{ $key+1 ?? '--' }}</td>
-                <td>{{ $user->name ?? '--' }}</td>
-                <td>{{ $user->email ?? '--' }}</td>
-                <td>
-                    <span class="badge bg-primary">{{ $user->role ?? '--' }}</span>
-                </td>
-                <td>
-                    {{-- <button class="btn btn-primary"><a style="text-decoration: none; color:white" href="{{ route('delete', ['id'=>$user->id]) }}">Edit</a></button> --}}
-                    <button class="btn btn-danger @if(auth()->user()->id == $user->id) disabled @endif "><a style="text-decoration: none; color:white" href="{{ route('delete',['id'=>$user->id]) }}">Delete</a></button>
-                </td>
-            </tr>
-          @empty
-            <tr>
-                <td colspan="2">No Record Found !</td>
-            </tr>
-          @endforelse
+            @forelse ($registrations as $key=>$registration)
+                <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $registration->first_name . ' ' .$registration->last_name ?? '--' }}</td>
+                    <td>{{ $registration->email ?? '--' }}</td>
+                    <td>{{ $registration->dob ?? '--' }}</td>
+                    <td>{{ $registration->registration_date ?? '--' }}</td>
+                    <td>
+                        <a href="{{ route('user.detail',['id'=>$registration->id]) }}">
+                            <button class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                        </a>
+                        <a href="{{ route('delete',['id'=>$registration->id]) }}">
+                            <button class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            @empty
+                <tr colspan="6">
+                    <td>No Registrations Found !</td>
+                </tr>
+            @endforelse
         </tbody>
       </table>
    </div>

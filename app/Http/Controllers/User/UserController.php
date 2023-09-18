@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\HugsIncRegistration;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -34,13 +35,13 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $user = User::find($id);
-        if(isset($user) && !empty($user))
+        $registration = HugsIncRegistration::find($id);
+        if(isset($registration) && !empty($registration))
         {
-            $user->delete();
-            return redirect()->route('user.login');
+            $registration->delete();
+            return redirect()->route('users');
         }
-        return redirect()->route('user.login');
+        return redirect()->route('users');
     }
 
     public function create()
@@ -48,15 +49,15 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function users(Request $request)
     {
-        $user = new User();
-        $user->name = $request['username'];
-        $user->email = $request['email'];
-        $user->role = "Admin";
-        $user->password = Hash::make($request['password']);
-        $user->save();
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $registrations = HugsIncRegistration::all();
+        return view('users.index', compact('registrations'));
+    }
+
+    public function userDetail($id)
+    {
+        $registration = HugsIncRegistration::find($id);
+        return view('users.show',compact('registration'));
     }
 }

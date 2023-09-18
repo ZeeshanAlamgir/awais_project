@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\HugsIncRegistration;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,8 @@ class AuthController extends controller
             'email'     => $request['email'],
             'password'  => $request['password'],
         ];
-        $users = User::all();
-        return Auth::attempt($credientials) ? view('users.index', compact('users')) : redirect()->route('login_form');
+        $registrations = HugsIncRegistration::latest()->get();
+        return Auth::attempt($credientials) ? view('users.index', compact('registrations')) : redirect()->route('login_form');
     }
 
     public function logout ()
