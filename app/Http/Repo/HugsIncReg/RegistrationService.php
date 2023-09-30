@@ -74,7 +74,12 @@ class RegistrationService implements RegistrationInterface
 
             if(isset($request['email']) && !empty($request['email']))
             {
-                event(new SendRegistrationMailEvent($request['email']));
+                $details =
+                [
+                    'email'     => $request['email'],
+                    'username'  => $request['first_name']. ' '.$request['last_name']
+                ];
+                event(new SendRegistrationMailEvent($details));
             }
             return $hugs_inc_reg;
         }

@@ -16,17 +16,16 @@ class RegistrationMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $username = '';
+    public function __construct($username)
     {
-        //
+        $this->username = $username;
     }
 
     public function build()
-
     {
-
+        $username = $this->username;
         return $this->subject('Pre Registration Mail')
-        ->view('mail.registration-mail');
-
+        ->view('mail.registration-mail',compact('username'));
     }
 }

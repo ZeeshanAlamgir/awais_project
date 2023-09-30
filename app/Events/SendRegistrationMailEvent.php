@@ -17,10 +17,10 @@ class SendRegistrationMailEvent
     /**
      * Create a new event instance.
      */
-    public $email = '';
-    public function __construct($email)
+    public $details = [];
+    public function __construct($details)
     {
-        $this->email = $email;
+        $this->details = $details;
     }
 
     /**
