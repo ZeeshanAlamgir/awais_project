@@ -1,5 +1,5 @@
 <h2>MEDICAL TRAINING HUB</h2>
-Dear {{ $user }}, <br>
+Dear <b>{{ $user }}, </b><br>
 Thank you for registering in medical training hub. We are excited that you have selected us to your courses
 In order to complete your application, please go to the enrollment link and enroll yourself
 Here is the enrollment link
