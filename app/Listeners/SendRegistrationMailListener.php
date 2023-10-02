@@ -13,7 +13,8 @@ class SendRegistrationMailListener
     /**
      * Create the event listener.
      */
-    public $email = '', $username = '';
+    public $email = '';
+    public $username = '';
     public function __construct()
     {
         //
@@ -26,7 +27,6 @@ class SendRegistrationMailListener
     {
         $this->email = $event->details['email'];
         $this->username = $event->details['username'];
-        
         return Mail::to($this->email)->send(new RegistrationMail($this->username));
     }
 }

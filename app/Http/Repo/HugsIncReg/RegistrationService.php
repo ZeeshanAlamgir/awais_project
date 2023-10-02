@@ -3,10 +3,12 @@
 namespace App\Http\Repo\HugsIncReg;
 
 use App\Events\SendRegistrationMailEvent;
+use App\Mail\RegistrationMail;
 use App\Models\HugsIncRegistration;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class RegistrationService implements RegistrationInterface
 {
@@ -74,6 +76,16 @@ class RegistrationService implements RegistrationInterface
 
             if(isset($request['email']) && !empty($request['email']))
             {
+                $data = array('name'=>$request['first_name']);
+
+                // Mail::send(['text'=>'mail.registration-mail'], $data, function($message) {
+                //    $message->to('zeeshanalamgir1998@gmail.com', 'Tutorials Point')->subject
+                //       ('Laravel Basic Testing Mail');
+                //    $message->from('zeeshanalamgir1998@gmail.com','Virat Gandhi');
+                // });
+
+                // $ma = Mail::to($request['email'])->send(new RegistrationMail());
+                // dd($ma);
                 $details =
                 [
                     'email'     => $request['email'],
