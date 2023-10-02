@@ -13,8 +13,7 @@ class SendRegistrationMailListener
     /**
      * Create the event listener.
      */
-    public $email = '';
-    public $username = '';
+    public $email = '', $username = '';
     public function __construct()
     {
         //
