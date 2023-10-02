@@ -9,5 +9,5 @@ If you have any questions throughout the registration and enrollment process, pl
 Thank you, <br>
 Connect with us <br><br>
 
-Email: info@medicaltraininghub.com
+Email: info@medicaltraininghub.com <br>
 Phone: 877-204-6232
