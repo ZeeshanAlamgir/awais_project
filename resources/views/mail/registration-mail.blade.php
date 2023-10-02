@@ -1,5 +1,5 @@
 <h2>MEDICAL TRAINING HUB</h2>
-Dear <b>{{ $user }}, </b><br>
+Dear <b>{{ $user }},</b><br>
 Thank you for registering in medical training hub. We are excited that you have selected us to your courses
 In order to complete your application, please go to the enrollment link and enroll yourself
 Here is the enrollment link
@@ -9,5 +9,5 @@ If you have any questions throughout the registration and enrollment process, pl
 Thank you, <br>
 Connect with us <br><br>
 
-Email: info@medicaltraininghub.com <br>
-Phone: 877-204-6232
+<b>Email</b>: info@medicaltraininghub.com <br>
+<b>Phone</b>: 877-204-6232
