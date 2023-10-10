@@ -9,21 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class HugMail extends Mailable
+class ContactUs extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $details = [];
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(object $details)
     {
-        //
+        $this->details = $details;
     }
 
     public function build()
     {
-        return $this->subject('Hug Reg Mail')
-        ->view('mail.hug-mail');
+        return $this->subject('Contact Us')
+        ->view('mail.contact-us', ['details'=>$this->details]);
     }
 }

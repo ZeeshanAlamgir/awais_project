@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PreRegistration\HugsIncRegistrationController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
@@ -36,3 +37,7 @@ Route::controller(UserController::class)->group( function () {
 Route::controller(AuthController::class)->group( function () {
     Route::get('login', 'login');
 } );
+
+Route::controller(ContactUsController::class)->group( function () {
+    Route::get('store', 'store');
+} )->middleware('auth:sanctum');;
