@@ -31,4 +31,77 @@ class ContactUsController extends Controller
             'data'          => $contact_us,
         ]);
     }
+
+    public function showContactUs ()
+    {
+        $contact_us = ContactUs::all();
+        if(count($contact_us)>0)
+        {
+            return response()->json([
+                'status'        => true,
+                'status_code'   => 200,
+                'message'       => "Record Found Successfully",
+                'data'          => $contact_us,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'        => false,
+                'status_code'   => 400,
+                'message'       => "Record Not Found",
+                'data'          => $contact_us,
+            ]);
+        }
+    }
+
+    public function deleteContactUs ($id)
+    {
+        $contact_us = ContactUs::find($id);
+        if(isset($contact_us))
+        {
+            $contact_us->delete();
+            return response()->json([
+                'status'        => true,
+                'status_code'   => 200,
+                'message'       => "Contact Deleted",
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'        => false,
+                'status_code'   => 400,
+                'message'       => "Record Not Found",
+            ]);
+        }
+    }
+
+    public function updateContactUs ($id)
+    {
+        $contact_us = ContactUs::find($id);
+        if(isset($contact_us))
+        {
+            $contact_us->name = $request['name'] ?? '';
+            $contact_us->email = $request['email'] ?? '';
+            $contact_us->subject = $request['subject'] ?? '';
+            $contact_us->phone = $request['phone'] ?? '';
+            $contact_us->location = $request['location'] ?? '';
+            $contact_us->save();
+            return response()->json([
+                'status'        => true,
+                'status_code'   => 200,
+                'message'       => "Record Updated Successfully",
+                'data'          => $contact_us,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'        => false,
+                'status_code'   => 400,
+                'message'       => "Record Not Found",
+            ]);
+        }
+    }
 }

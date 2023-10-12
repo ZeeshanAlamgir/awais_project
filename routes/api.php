@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PreRegistration\HugsIncRegistrationController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\UserEmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,5 +40,12 @@ Route::controller(AuthController::class)->group( function () {
 } );
 
 Route::controller(ContactUsController::class)->group( function () {
-    Route::get('store', 'store');
-} )->middleware('auth:sanctum');;
+    Route::post('store', 'store');
+    Route::get('show-contact-us', 'showContactUs');
+    Route::get('delete-contact-us/{id}', 'deleteContactUs');
+    Route::post('update-contact-us/{id}', 'updateContactUs');
+} )->middleware('auth:sanctum');
+
+Route::controller(UserEmailController::class)->group( function () {
+    Route::get('store-email', 'storeEmail');
+} );
